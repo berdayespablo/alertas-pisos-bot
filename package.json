@@ -1,0 +1,23 @@
+{
+  "name": "alertas-pisos-bot",
+  "version": "1.0.0",
+  "description": "Bot de telegram para recopilar información de portales inmobiliarios",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node index.ts"
+  },
+  "author": "Pablo Berdayes Prieto",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cheerio": "^1.0.0-rc.12",
+    "node-cron": "^3.0.3",
+    "telebot": "^1.4.1"
+  },
+  "devDependencies": {
+    "@types/node-cron": "^3.0.11",
+    "@types/telebot": "^1.2.7",
+    "ts-node": "^10.9.2"
+  }
+}
