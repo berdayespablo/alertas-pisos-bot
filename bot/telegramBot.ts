@@ -1,5 +1,7 @@
 import Telebot from 'telebot';
-import { TELEGRAM_TOKEN } from '../constants';
+import { getEnvVariable } from '../utils/secretsUtils'
+
+const TELEGRAM_TOKEN = getEnvVariable('TELEGRAM_TOKEN');
 
 const bot = new Telebot({
     token: TELEGRAM_TOKEN

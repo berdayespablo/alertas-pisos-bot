@@ -1,6 +1,8 @@
 import Telebot from 'telebot';
 import { SentMessage } from '../models/apartment';
-import { CHAT_ID } from '../constants';
+import { getEnvVariable } from './secretsUtils';
+
+const CHAT_ID = getEnvVariable('CHAT_ID');
 
 export const sendNewMessages = async (bot: Telebot, newApartments: SentMessage[]): Promise<SentMessage[]> => {
     let sentMessages: SentMessage[] = [];
