@@ -7,9 +7,16 @@ import { SentMessage } from './models/apartment';
 let lastPublication: string = "";
 let sentMessages: SentMessage[] = [];
 
+const filters = {
+    priceMin: 400,
+    priceMax: 550,
+    metersMin: 40,
+    metersMax: 100
+};
+
 const checkNewPublications = async () => {
     console.log('Revisando nuevas publicaciones...');
-    const apartments = await getPublications();
+    const apartments = await getPublications(filters);
 
     let newApartments: SentMessage[] = [];
     let currentPublications: string[] = apartments.map(apartment => apartment.url);
