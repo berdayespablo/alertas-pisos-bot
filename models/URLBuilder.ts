@@ -31,36 +31,25 @@ export class URLBuilder {
         conditions?: string[],
         features?: string[]
     }): URLBuilder {
-        if (options.priceMin !== undefined) {
-            this.addValueFilter('precio-desde_', options.priceMin);
-        }
-        if (options.priceMax !== undefined) {
-            this.addValueFilter('precio-hasta_', options.priceMax);
-        }
-        if (options.metersMin !== undefined) {
-            this.addValueFilter('metros-cuadrados-mas-de_', options.metersMin);
-        }
-        if (options.metersMax !== undefined) {
-            this.addValueFilter('metros-cuadrados-menos-de_', options.metersMax);
-        }
-        if (options.publishDate !== undefined) {
-            this.addFilter(options.publishDate);
-        }
-        if (options.type !== undefined) {
-            options.type.forEach(type => this.addFilter(type));
-        }
-        if (options.numRooms !== undefined) {
-            options.numRooms.forEach(room => this.addFilter(room));
-        }
-        if (options.numBathrooms !== undefined) {
-            options.numBathrooms.forEach(bathroom => this.addFilter(bathroom));
-        }
-        if (options.conditions !== undefined) {
-            options.conditions.forEach(condition => this.addFilter(condition));
-        }
-        if (options.features !== undefined) {
-            options.features.forEach(feature => this.addFilter(feature));
-        }
+        const mappings: { [key: string]: (value: any) => void } = {
+            priceMin: (value: number) => this.addValueFilter('precio-desde_', value),
+            priceMax: (value: number) => this.addValueFilter('precio-hasta_', value),
+            metersMin: (value: number) => this.addValueFilter('metros-cuadrados-mas-de_', value),
+            metersMax: (value: number) => this.addValueFilter('metros-cuadrados-menos-de_', value),
+            publishDate: (value: string) => this.addFilter(value),
+            type: (value: string[]) => value.forEach(type => this.addFilter(type)),
+            numRooms: (value: string[]) => value.forEach(room => this.addFilter(room)),
+            numBathrooms: (value: string[]) => value.forEach(bathroom => this.addFilter(bathroom)),
+            conditions: (value: string[]) => value.forEach(condition => this.addFilter(condition)),
+            features: (value: string[]) => value.forEach(feature => this.addFilter(feature))
+        };
+
+        Object.entries(options).forEach(([key, value]) => {
+            if (value !== undefined && mappings[key]) {
+                mappings[key](value);
+            }
+        });
+
         return this;
     }
 

@@ -53,13 +53,16 @@ export const getPublications = async (options: {
             const price = parseInt(detailPage('.price').text().replace(/[^\d]/g, ''), 10);
             const space = parseInt(detailPage('.info-features span:nth-of-type(1)').text().replace(/[^\d]/g, ''), 10);
             const numRooms = parseInt(detailPage('.info-features span:nth-of-type(2)').text().replace(/[^\d]/g, ''), 10);
-            const floor = detailPage('.details-property_features ul li').map((i, el) => {
+            
+            const floorDetails = detailPage('.details-property_features ul li').map((i, el) => {
                 const text = detailPage(el).text().toLowerCase();
-                if (text.includes('planta')) {
-                    return text;
+                if (text.includes('planta') || text.includes('exterior') || text.includes('ascensor')) {
+                    return text.replace('planta', '').trim();
                 }
                 return null;
             }).get().filter((item: string | null) => item !== null).join(' ');
+            const floor = floorDetails.length > 0 ? floorDetails : 'No especificado';
+            
             const dateUpdated = detailPage('.date-update-text').text().replace('Anuncio actualizado hace ', '').trim();
 
             const features = detailPage('.details-property_features ul:nth-of-type(1) li').map((i, el) => detailPage(el).text().trim()).get();
