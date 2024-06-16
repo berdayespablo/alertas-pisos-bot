@@ -8,6 +8,7 @@ export interface Apartment {
     energyEmissions: string;
     features: string[];
     floor: string;
+    location: string;
     numRooms: number;
     price: number;
     publishDate: string;
