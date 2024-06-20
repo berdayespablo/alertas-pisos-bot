@@ -6,12 +6,25 @@ import { URLBuilder } from '../models/URLBuilder';
 const baseUrl = 'https://www.idealista.com/areas/alquiler-viviendas/';
 const area = '/?shape=%28%28ekbhGbfyb%40s%5C%3FgSiC%7BIiRbBiRzI%7Bi%40q%40se%40uCoT%7BImTkHcAeE%7EMkH%3F%3FqG%7CIoToKrGtCiR%7DI%3Fo%40wIhHiClK_NaBwIyFgCtCsGpNvI%3FePmKal%40uC%7Bi%40%3Fyv%40p%40mE%3Fst%40bBqG%60B%7Di%40fE%7Di%40bBqGjHor%40hHeP%7CW%7BZjHiCzW%3F%60MlEfSvXlKja%40bB%7EMjHdPzItIvQgCfSePng%40en%40jHmE%60%5D%7DZvm%40_%5D%60%5BbAjHhCtQpVbB%60N%3FvXnKbP%3FrGjHbP%3F%60NpNvXvQvg%40%3Frt%40pNdP%3FdPdPbPtCzK%3Fnc%40hHvXvQd_%40lKre%40%3FbP%7CIdPxF%3Fq%40d_%40uCvXoK%7EMuQja%40kHpGkHvXmKpGkHdPci%40cA%7Bb%40sVoYwXwF_Nuj%40c%7B%40gEuIyTsG%7DW%3FuQhCia%40%60%5DgSlTgE%3Fyb%40%60%5D%7DIfC_MdPgE%60%5DqNre%40yFpG%29%29&ordenado-por=fecha-publicacion-desc';
 const httpHeaders = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-    'Accept-Encoding': 'gzip, deflate, br',
-    'Accept-Language': 'en-US,en;q=0.5',
-    'Connection': 'keep-alive'
+    ':authority': 'www.idealista.com',
+    ':method': 'GET',
+    ':path': '/areas/alquiler-viviendas/con-precio-desde_400,precio-hasta_550,metros-cuadrados-mas-de_40,metros-cuadrados-menos-de_100/?shape=%28%28ekbhGbfyb%40s%5C%3FgSiC%7BIiRbBiRzI%7Bi%40q%40se%40uCoT%7BImTkHcAeE%7EMkH%3F%3FqG%7CIoToKrGtCiR%7DI%3Fo%40wIhHiClK_NaBwIyFgCtCsGpNvI%3FePmKal%40uC%7Bi%40%3Fyv%40p%40mE%3Fst%40bBqG%60B%7Di%40fE%7Di%40bBqGjHor%40hHeP%7CW%7BZjHiCzW%3F%60MlEfSvXlKja%40bB%7EMjHdPzItIvQgCfSePng%40en%40jHmE%60%5D%7DZvm%40_%5D%60%5BbAjHhCtQpVbB%60N%3FvXnKbP%3FrGjHbP%3F%60NpNvXvQvg%40%3Frt%40pNdP%3FdPdPbPtCzK%3Fnc%40hHvXvQd_%40lKre%40%3FbP%7CIdPxF%3Fq%40d_%40uCvXoK%7EMuQja%40kHpGkHvXmKpGkHdPci%40cA%7Bb%40sVoYwXwF_Nuj%40c%7B%40gEuIyTsG%7DW%3FuQhCia%40%60%5DgSlTgE%3Fyb%40%60%5D%7DIfC_MdPgE%60%5DqNre%40yFpG%29%29',
+    ':scheme': 'https',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+    'Accept-Encoding': 'gzip, deflate, br, zstd',
+    'Accept-Language': 'es,es-ES;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
+    'Priority': 'u=0, i',
+    'Sec-Ch-Ua': '"Not/A)Brand";v="8", "Chromium";v="126", "Microsoft Edge";v="126"',
+    'Sec-Ch-Ua-Mobile': '?0',
+    'Sec-Ch-Ua-Platform': '"Windows"',
+    'Sec-Fetch-Dest': 'document',
+    'Sec-Fetch-Mode': 'navigate',
+    'Sec-Fetch-Site': 'none',
+    'Sec-Fetch-User': '?1',
+    'Upgrade-Insecure-Requests': '1',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0'
 };
+
 
 export const getPublications = async (options: {
     priceMin?: number,
