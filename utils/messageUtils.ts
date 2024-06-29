@@ -48,6 +48,8 @@ const checkPets = (description: string): string => {
         "no se admiten mascotas",
         "no se permiten mascotas",
         "no mascotas",
+        "no animales",
+        "nada de animales",
         "no aptas mascotas",
         "no se aceptan mascotas"
     ];
@@ -63,7 +65,6 @@ const checkPets = (description: string): string => {
             return "✅";
         }
     }
-
 
     return "❓";
 };
