@@ -27,6 +27,14 @@ const checkNewPublications = async () => {
     sentMessages = await deleteOldMessages(bot, sentMessages, currentPublications);
 };
 
-cron.schedule('* * * * *', checkNewPublications);
+const interval = parseInt(process.argv[2], 10);
+
+if (isNaN(interval) || interval <= 0) {
+    console.error('Por favor, proporciona un intervalo válido en minutos.');
+    process.exit(1);
+}
+
+console.log(`Programado para revisar publicaciones cada ${interval} minuto(s).`);
+cron.schedule(`*/${interval} * * * *`, checkNewPublications);
 
 bot.start();
