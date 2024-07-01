@@ -9,10 +9,11 @@ export const sendNewMessages = async (bot: Telebot, newApartments: SentMessage[]
     for (const apartment of newApartments) {
         console.log("Apartamento -> ", apartment);
         const petsEmoji = checkPets(apartment.apartment.description);
+        const highlightedLocation = highlightLocation(apartment.apartment.location);
         const message = await bot.sendMessage(CHAT_ID, `
         🏠 _Nuevo piso encontrado_:
             *Título:* ${apartment.apartment.title}
-            *Ubicación:* ${apartment.apartment.location}
+            *Ubicación:* ${highlightedLocation}
             *Planta*: ${apartment.apartment.floor}
             *Precio*: ${apartment.apartment.price} €/mes
             *Espacio*: ${apartment.apartment.space} m²
@@ -34,6 +35,7 @@ export const deleteOldMessages = async (bot: Telebot, sentMessages: SentMessage[
         return true;
     });
 };
+
 const checkPets = (description: string): string => {
     const descriptionLowerCase = description.toLowerCase();
 
@@ -67,4 +69,22 @@ const checkPets = (description: string): string => {
     }
 
     return "❓";
+};
+
+const locationEmojis: { [place: string]: string } = {
+    oviedo: '🔵',
+    corredoria: '🟣',
+    lugones: '🟢',
+    gijón: '🔴',
+    gijon: '🔴'
+};
+
+const highlightLocation = (location: string): string => {
+    const lowerCaseLocation = location.toLowerCase();
+    for (const place in locationEmojis) {
+        if (lowerCaseLocation.includes(place)) {
+            return `${location} ${locationEmojis[place]}`;
+        }
+    }
+    return `${location} ⚪`;
 };
