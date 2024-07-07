@@ -116,6 +116,7 @@ export const getPublications = async (options: {
 
             const features = detailPage('.details-property_features ul:nth-of-type(1) li').map((i, el) => detailPage(el).text().trim()).get();
             const building = detailPage('.details-property_features ul:nth-of-type(2) li').map((i, el) => detailPage(el).text().trim()).get();
+            const hasStorageRoom = features.some(feature => feature.toLowerCase().includes('trastero'));
 
             const energyConsumption = detailPage('.icon-energy-c-e').first().text().trim();
             const energyEmissions = detailPage('.icon-energy-c-e').last().text().trim();
@@ -131,6 +132,7 @@ export const getPublications = async (options: {
                 publishDate,
                 space,
                 numRooms,
+                hasStorageRoom,
                 floor,
                 dateUpdated,
                 location,

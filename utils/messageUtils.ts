@@ -10,6 +10,7 @@ export const sendNewMessages = async (bot: Telebot, newApartments: SentMessage[]
         console.log("Apartamento -> ", apartment);
         const petsEmoji = checkPets(apartment.apartment.description);
         const highlightedLocation = highlightLocation(apartment.apartment.location);
+        const hasStorageRoom = apartment.apartment.hasStorageRoom ? 'Sí' : 'No';
         const message = await bot.sendMessage(CHAT_ID, `
         🏠 _Nuevo piso encontrado_:
             *Título:* ${apartment.apartment.title}
@@ -18,6 +19,7 @@ export const sendNewMessages = async (bot: Telebot, newApartments: SentMessage[]
             *Precio*: ${apartment.apartment.price} €/mes
             *Espacio*: ${apartment.apartment.space} m²
             *Número de habitaciones*: ${apartment.apartment.numRooms}
+            *Trastero*: ${hasStorageRoom} 
             *🐈 Mascotas:* ${petsEmoji}
             URL: ${apartment.apartment.url}`, { parseMode: 'Markdown' }
         );
@@ -49,6 +51,8 @@ const checkPets = (description: string): string => {
     const negativePhrases = [
         "no se admiten mascotas",
         "no se permiten mascotas",
+        "no admite mascotas",
+        "no admite mascota",
         "no mascotas",
         "no animales",
         "nada de animales",
