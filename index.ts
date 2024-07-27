@@ -15,20 +15,11 @@ const filters = {
 
 const checkNewPublications = async () => {
     console.log('Revisando nuevas publicaciones...');
-    const apartments = await getPublications(filters);
-
-    let newApartments: SentMessage[] = [];
-    let currentPublications: string[] = apartments.map(apartment => apartment.url);
-
-    for (const apartment of apartments) {
-        const isAlreadySent = sentMessages.some(sentMessage => sentMessage.apartment.url === apartment.url);
-        if (!isAlreadySent) {
-            newApartments.push({ messageId: 0, apartment });
-        }
-    }
+    const { newApartments, currentPublications } = await getPublications(filters);
 
     if (newApartments.length) {
-        sentMessages = sentMessages.concat(await sendNewMessages(bot, newApartments));
+        const newSentMessages = newApartments.map(apartment => ({ messageId: 0, apartment }));
+        sentMessages = sentMessages.concat(await sendNewMessages(bot, newSentMessages));
     } else {
         console.log('No hay nuevas publicaciones.');
     }
@@ -36,6 +27,14 @@ const checkNewPublications = async () => {
     sentMessages = await deleteOldMessages(bot, sentMessages, currentPublications);
 };
 
-cron.schedule('* * * * *', checkNewPublications);
+const interval = parseInt(process.argv[2], 10);
+
+if (isNaN(interval) || interval <= 0) {
+    console.error('Por favor, proporciona un intervalo válido en minutos.');
+    process.exit(1);
+}
+
+console.log(`Programado para revisar publicaciones cada ${interval} minuto(s).`);
+cron.schedule(`*/${interval} * * * *`, checkNewPublications);
 
 bot.start();

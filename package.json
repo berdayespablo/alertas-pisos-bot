@@ -14,11 +14,13 @@
     "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.4.5",
     "node-cron": "^3.0.3",
-    "telebot": "^1.4.1"
+    "telebot": "^1.4.1",
+    "user-agents": "^1.1.241"
   },
   "devDependencies": {
     "@types/node-cron": "^3.0.11",
     "@types/telebot": "^1.2.7",
+    "@types/user-agents": "^1.0.4",
     "ts-node": "^10.9.2"
   }
 }
